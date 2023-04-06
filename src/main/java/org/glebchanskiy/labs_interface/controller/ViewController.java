@@ -2,6 +2,9 @@ package org.glebchanskiy.labs_interface.controller;
 
 import lombok.AllArgsConstructor;
 import org.glebchanskiy.labs_interface.exception.MessageRecipientNotFoundException;
+import org.glebchanskiy.labs_interface.exception.ServiceNotResponseException;
+import org.glebchanskiy.labs_interface.model.Answer;
+import org.glebchanskiy.labs_interface.model.Form;
 import org.glebchanskiy.labs_interface.model.Message;
 import org.glebchanskiy.labs_interface.service.DispatchService;
 import org.springframework.stereotype.Controller;
@@ -15,28 +18,40 @@ public class ViewController {
 
     private final DispatchService dispatchService;
 
+//    @ModelAttribute("form")
+//    public Form mainInterfaceForm() {
+//        return new Form("", "");
+//    }
+
     @GetMapping()
-    public String view(@ModelAttribute("message") Message message,
-                       @ModelAttribute("answer") Message answer)
-    {
+    public String view(@ModelAttribute("form") Form form) {
         return "main";
     }
 
     @PostMapping()
-    public String input(@ModelAttribute Message messageDto, Model model) {
-        System.out.println(messageDto);
-        model.addAttribute("answer", dispatchService.dispatch(messageDto));
+    public String input(@ModelAttribute("form") Form form,
+                        Model model) {
+        Message message = new Message(form.getTextInput(), "view", form.getChosenService());
+        Answer answer = dispatchService.dispatch(message);
+        model.addAttribute("answer", answer);
         return "main";
     }
 
     @ExceptionHandler(MessageRecipientNotFoundException.class)
-    public String handleMessageRecipientNotFoundException(MessageRecipientNotFoundException exception, Model model) {
-        Message errorMessage = new Message(
-                exception.getMessage(),
-                exception.getRecipient(),
-                "View"
-        );
-        model.addAttribute("answer", errorMessage);
+    public String handleMessageRecipientNotFoundException(MessageRecipientNotFoundException exception,
+                                                          Model model
+    ) {
+        model.addAttribute("form", new Form());
+        model.addAttribute("answer", new Answer(exception.getMessage()));
+        return "main";
+    }
+
+    @ExceptionHandler(ServiceNotResponseException.class)
+    public String handleServiceNotResponseException(ServiceNotResponseException exception,
+                                                    Model model
+    ) {
+        model.addAttribute("form", new Form());
+        model.addAttribute("answer", new Answer(exception.getMessage()));
         return "main";
     }
 }

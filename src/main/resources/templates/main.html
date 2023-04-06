@@ -3,28 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>main page</title>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
     <link th:href="@{/style/main.css}" rel="stylesheet" />
 </head>
 <body>
 
     <h2> Labs Web Interface </h2>
     <br/>
+    <form th:method="POST" th:action="@{/}" th:object="${form}" class="col-4 border rounded p-3">
+        <div class="form-group my-2">
+            <label for="inputState">Choose lab</label>
+            <select th:field="*{chosenService}" id="inputState" class="form-control">
+                <option value="pdnf-validator" selected>pdnf validator</option>
+                <option value="test1" >lab2</option>
+                <option value="test2" >lab3</option>
+            </select>
+        </div>
+        <div class="form-group my-2">
+            <label for="input">Enter</label>
+            <input th:field="*{textInput}" type="text" class="form-control" id="input"placeholder="placeholder">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
-    <form th:method="POST" th:action="@{/}" th:object="${message}">
-        <label for="to">Кому</label>
-        <input type="text" th:field="*{to}" id="to"/>
+    <div th:if="${answer != null}" class="d-flex justify-content-center col-4 my-4 border rounded p-3">
+        <p th:text="*{answer.getText()}" class="p-1 m-0" >[answer]</p>
+    </div>
+<!--    <div th:class="col-4" th:object="${answer}">-->
+<!--        <p th:text="${answer.getText()}">[answer]</p>-->
+<!--    </div>-->
 
-        <label for="from">От кого</label>
-        <input type="text" th:field="*{from}" id="from"/>
-
-        <label for="name">Сообщение</label>
-        <input type="text" th:field="*{text}" id="name"/>
-
-<!--        <div th:if="${answer != null}">-->
-        <p th:text="${answer.getText()}" class="answer">[answer]</p>
+<!--    <form th:method="POST" th:action="@{/}" th:object="${message}" th:class="fo">-->
+<!--        <div th:class="form-control">-->
+<!--            <label for="to">Кому</label>-->
+<!--            <input type="text" th:field="*{to}" id="to"/>-->
 <!--        </div>-->
 
-        <input type="submit" value="Enter" class="btn"/>
-    </form>
+
+<!--        <div th:class="form-control">-->
+<!--            <label for="from">От кого</label>-->
+<!--            <input type="text" th:field="*{from}" id="from"/>-->
+<!--        </div>-->
+
+<!--        <div th:class="form-control">-->
+<!--            <label for="name">Сообщение</label>-->
+<!--            <input type="text" th:field="*{text}" id="name"/>-->
+<!--        </div>-->
+
+<!--        <p th:text="${answer.getText()}" class="answer">[answer]</p>-->
+
+<!--        <input type="submit" value="Enter" class="btn"/>-->
+<!--    </form>-->
 </body>
 </html>
