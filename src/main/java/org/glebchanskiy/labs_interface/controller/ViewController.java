@@ -18,11 +18,6 @@ public class ViewController {
 
     private final DispatchService dispatchService;
 
-//    @ModelAttribute("form")
-//    public Form mainInterfaceForm() {
-//        return new Form("", "");
-//    }
-
     @GetMapping()
     public String view(@ModelAttribute("form") Form form) {
         return "main";

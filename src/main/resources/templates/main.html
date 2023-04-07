@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
 <head>
     <meta charset="UTF-8">
     <title>main page</title>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
     <link th:href="@{/style/main.css}" rel="stylesheet" />
 </head>
-<body>
 
+<body>
     <h2> Labs Web Interface </h2>
     <br/>
     <form th:method="POST" th:action="@{/}" th:object="${form}" class="col-4 border rounded p-3">
@@ -29,30 +30,6 @@
     <div th:if="${answer != null}" class="d-flex justify-content-center col-4 my-4 border rounded p-3">
         <p th:text="*{answer.getText()}" class="p-1 m-0" >[answer]</p>
     </div>
-<!--    <div th:class="col-4" th:object="${answer}">-->
-<!--        <p th:text="${answer.getText()}">[answer]</p>-->
-<!--    </div>-->
-
-<!--    <form th:method="POST" th:action="@{/}" th:object="${message}" th:class="fo">-->
-<!--        <div th:class="form-control">-->
-<!--            <label for="to">Кому</label>-->
-<!--            <input type="text" th:field="*{to}" id="to"/>-->
-<!--        </div>-->
-
-
-<!--        <div th:class="form-control">-->
-<!--            <label for="from">От кого</label>-->
-<!--            <input type="text" th:field="*{from}" id="from"/>-->
-<!--        </div>-->
-
-<!--        <div th:class="form-control">-->
-<!--            <label for="name">Сообщение</label>-->
-<!--            <input type="text" th:field="*{text}" id="name"/>-->
-<!--        </div>-->
-
-<!--        <p th:text="${answer.getText()}" class="answer">[answer]</p>-->
-
-<!--        <input type="submit" value="Enter" class="btn"/>-->
-<!--    </form>-->
 </body>
+
 </html>
