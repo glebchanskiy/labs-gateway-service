@@ -6,6 +6,7 @@ import org.glebchanskiy.labs_interface.exception.ServiceNotResponseException;
 import org.glebchanskiy.labs_interface.model.Answer;
 import org.glebchanskiy.labs_interface.model.Form;
 import org.glebchanskiy.labs_interface.model.Message;
+import org.glebchanskiy.labs_interface.requester.impl.RequesterException;
 import org.glebchanskiy.labs_interface.service.DispatchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +42,8 @@ public class ViewController {
         return "main";
     }
 
-    @ExceptionHandler(ServiceNotResponseException.class)
-    public String handleServiceNotResponseException(ServiceNotResponseException exception,
+    @ExceptionHandler(RequesterException.class)
+    public String handleServiceNotResponseException(RequesterException exception,
                                                     Model model
     ) {
         model.addAttribute("form", new Form());
