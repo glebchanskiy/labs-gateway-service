@@ -1,9 +1,14 @@
 package org.glebchanskiy.labs_interface.conf;
 
+import org.glebchanskiy.labs_interface.model.Answer;
+import org.glebchanskiy.labs_interface.model.Message;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Configuration
 public class Config {
@@ -22,5 +27,15 @@ public class Config {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public Map<Message, Answer> cache() {
+        return new LinkedHashMap<>() {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<Message, Answer> eldest) {
+                return size() >= 25;
+            }
+        };
     }
 }
