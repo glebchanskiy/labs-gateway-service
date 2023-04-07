@@ -2,6 +2,9 @@ package org.glebchanskiy.labs_interface.conf;
 
 import org.glebchanskiy.labs_interface.model.Answer;
 import org.glebchanskiy.labs_interface.model.Message;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -11,7 +14,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
+@EnableCaching
 public class Config {
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("answers");
+    }
 
     @Bean
     public CommonsRequestLoggingFilter commonsRequestLoggingFilter() {
@@ -29,13 +37,4 @@ public class Config {
         return new RestTemplate();
     }
 
-    @Bean
-    public Map<Message, Answer> cache() {
-        return new LinkedHashMap<>() {
-            @Override
-            protected boolean removeEldestEntry(Map.Entry<Message, Answer> eldest) {
-                return size() >= 25;
-            }
-        };
-    }
 }
