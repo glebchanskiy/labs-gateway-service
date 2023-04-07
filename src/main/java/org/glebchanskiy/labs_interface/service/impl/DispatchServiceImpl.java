@@ -1,13 +1,11 @@
 package org.glebchanskiy.labs_interface.service.impl;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.glebchanskiy.labs_interface.exception.MessageRecipientNotFoundException;
 import org.glebchanskiy.labs_interface.model.Answer;
 import org.glebchanskiy.labs_interface.model.Message;
 import org.glebchanskiy.labs_interface.requester.MessageRequester;
 import org.glebchanskiy.labs_interface.service.DispatchService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +23,12 @@ public class DispatchServiceImpl implements DispatchService {
     @Override
     public Answer dispatch(Message message) {
         switch (message.getTo()) {
-            case "pdnf-validator" -> {
+            case "lois-service-lab1" -> {
                 return messageRequester.getDelegatedTaskAnswer(
                         loisLab1Url, message
                 );
             }
-            case "logic" -> {
+            case "aois-service-lab3" -> {
                 return messageRequester.getDelegatedTaskAnswer(
                         aoisLab3Url,
                         message
