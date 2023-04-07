@@ -17,3 +17,4 @@ java -jar target/labs_interface-0.0.1-SNAPSHOT.war
 ## Labs-services
 After running labs interface, you can launch the necessary services. Now available:
 - [lois-service-lab1](https://github.com/glebchanskiy/lois-service-lab1)
+- [aois-service-lab3](https://github.com/glebchanskiy/aois-service-lab3)
