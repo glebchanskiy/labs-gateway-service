@@ -17,7 +17,6 @@ public class DispatchServiceImpl implements DispatchService {
 
     @Override
     public Answer dispatch(Message message) {
-        System.out.println(message);
         switch (message.getTo()) {
             case "pdnf-validator" -> {
                 return new Answer(toPdnfValidator(message).getText());
@@ -29,7 +28,6 @@ public class DispatchServiceImpl implements DispatchService {
                 return new Answer("test2 answer");
             }
         }
-        System.out.println("EXCEPTION");
         throw new MessageRecipientNotFoundException("Message from [" + message.getFrom() + "]. Recipient not found.", message.getTo());
     }
 
