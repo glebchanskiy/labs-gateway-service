@@ -31,7 +31,7 @@ public class DispatchServiceImpl implements DispatchService {
                 return messageRequester.getDelegatedTaskAnswer(aoisLab3Url, message);
             }
         }
-        throw new MessageRecipientNotFoundException("Message from [" + message.getFrom() + "]. Recipient not found.", message.getTo());
+        throw new MessageRecipientNotFoundException("Message from [" + message.getTo() + "]. Recipient not found.", message.getTo());
 
     }
 }

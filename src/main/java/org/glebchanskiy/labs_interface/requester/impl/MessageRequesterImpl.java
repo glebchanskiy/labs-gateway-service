@@ -26,7 +26,7 @@ public class MessageRequesterImpl implements MessageRequester {
             else
                 throw new RequesterException();
         } catch (Exception ex) {
-            throw new RequesterException("Service: " + message.getTo() + " not response.");
+            throw new RequesterException("Service '" + message.getTo() + "' not response.");
         }
     }
 }
