@@ -21,7 +21,6 @@ public class GatewayController {
         return dispatchService.dispatch(message);
     }
 
-    @CrossOrigin
     @ExceptionHandler({RequesterException.class, MessageRecipientNotFoundException.class})
     public Message handleServiceNotResponseException(Exception exception) {
         return new Message(exception.getMessage(), "dispatch", "view");
