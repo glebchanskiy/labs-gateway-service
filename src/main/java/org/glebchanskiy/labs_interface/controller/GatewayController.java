@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/")
-public class ApiController {
+public class GatewayController {
 
     private final DispatchService dispatchService;
 
