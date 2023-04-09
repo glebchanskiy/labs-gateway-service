@@ -1,4 +1,4 @@
-package org.glebchanskiy.labs_interface.exception;
+package org.glebchanskiy.labs_interface.service.impl;
 
 public class MessageRecipientNotFoundException extends RuntimeException {
     public MessageRecipientNotFoundException(String message, String recipient) {

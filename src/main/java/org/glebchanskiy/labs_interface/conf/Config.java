@@ -1,7 +1,5 @@
 package org.glebchanskiy.labs_interface.conf;
 
-import org.glebchanskiy.labs_interface.model.Answer;
-import org.glebchanskiy.labs_interface.model.Message;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
@@ -10,15 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @Configuration
 @EnableCaching
 public class Config {
     @Bean
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager("answers");
+        return new ConcurrentMapCacheManager("message");
     }
 
     @Bean

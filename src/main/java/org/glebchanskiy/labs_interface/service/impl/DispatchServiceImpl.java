@@ -1,16 +1,12 @@
 package org.glebchanskiy.labs_interface.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.glebchanskiy.labs_interface.exception.MessageRecipientNotFoundException;
-import org.glebchanskiy.labs_interface.model.Answer;
 import org.glebchanskiy.labs_interface.model.Message;
 import org.glebchanskiy.labs_interface.requester.MessageRequester;
 import org.glebchanskiy.labs_interface.service.DispatchService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +20,9 @@ public class DispatchServiceImpl implements DispatchService {
 
 
     @Override
-    @Cacheable(value = "answers", key = "#message")
-    public Answer dispatch(Message message) {
+    @Cacheable(value = "message", key ="#message")
+    public Message dispatch(Message message) {
+        System.out.println(message);
         switch (message.getTo()) {
             case "lois-service-lab1" -> {
                 return messageRequester.getDelegatedTaskAnswer(loisLab1Url, message);

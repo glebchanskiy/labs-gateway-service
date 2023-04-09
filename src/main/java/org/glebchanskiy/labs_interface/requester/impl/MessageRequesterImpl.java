@@ -1,8 +1,6 @@
 package org.glebchanskiy.labs_interface.requester.impl;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.glebchanskiy.labs_interface.model.Answer;
 import org.glebchanskiy.labs_interface.model.Message;
 import org.glebchanskiy.labs_interface.requester.MessageRequester;
 import org.springframework.stereotype.Service;
@@ -15,17 +13,18 @@ public class MessageRequesterImpl implements MessageRequester {
     private final RestTemplate restTemplate;
 
     @Override
-    public Answer getDelegatedTaskAnswer(String url, Message message) {
+    public Message getDelegatedTaskAnswer(String url, Message message) {
         try {
+
             Message response = restTemplate.postForEntity(
                     url,
                     message,
                     Message.class).getBody();
 
             if (response != null)
-                return new Answer(response.getText());
+                return new Message(response.getText(), response.getFrom(), response.getTo());
             else
-                return new Answer("empty");
+                throw new RequesterException();
         } catch (Exception ex) {
             throw new RequesterException("Service: " + message.getTo() + " not response.");
         }
