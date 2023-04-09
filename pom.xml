@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.glebchanskiy</groupId>
-	<artifactId>labs_interface</artifactId>
+	<artifactId>labs-gateway-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>labs_interface</name>
-	<description>Demo project for Spring Boot</description>
+	<name>labs-gateway-service</name>
+	<description>Gateway for labs-interface</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
